@@ -1,3 +1,5 @@
+import { disjoint } from "./helper.js";
+
 const level0 = [
     [1, 0, 0],
     [2, 0, 0],
@@ -189,4 +191,22 @@ export function rightNeighbors(coord) {
     }
     const [x, y, z] = coord;
     return [[x + 1, y, z]];
+}
+
+export function isOpen(coord, currentCoords) {
+    if (disjoint([coord], currentCoords)) false;
+    const [x, y, z] = coord;
+    if (
+        currentCoords.some(([a, b, c]) => a === x && b === y && c > z) ||
+        (z === 3 && currentCoords.some(([a, b, c]) => c === 4))
+    ) {
+        return false;
+    }
+    if (
+        disjoint(leftNeighbors(coord), currentCoords) ||
+        disjoint(rightNeighbors(coord), currentCoords)
+    ) {
+        return true;
+    }
+    return false;
 }
