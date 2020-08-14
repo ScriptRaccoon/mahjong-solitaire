@@ -24,8 +24,8 @@ function createTiles() {
 
         const tileFront = document.createElement("div");
         tileFront.classList.add("tileFront");
-        tileFront.style.width = `${TILE_WIDTH}px`;
-        tileFront.style.height = `${TILE_HEIGHT}px`;
+        tileFront.style.width = TILE_WIDTH + "px";
+        tileFront.style.height = TILE_HEIGHT + "px";
         tileFront.addEventListener("click", () => {
             click(coord);
         });
@@ -33,28 +33,28 @@ function createTiles() {
 
         const tile = document.createElement("div");
         tile.classList.add("tile");
-        tile.style.left = `${x * TILE_WIDTH + TILE_OFFSET * z + TOTAL_OFFSET_LEFT}px`;
-        tile.style.top = `${y * TILE_HEIGHT + TILE_OFFSET * z + TOTAL_OFFSET_TOP}px`;
+        tile.style.left = x * TILE_WIDTH + TILE_OFFSET * z + TOTAL_OFFSET_LEFT + "px";
+        tile.style.top = y * TILE_HEIGHT + TILE_OFFSET * z + TOTAL_OFFSET_TOP + "px";
         tile.style["z-index"] = z;
         tile.id = coord.toString();
-        tile.setAttribute("type", image.id);
+        tile.setAttribute("type", image.getAttribute("type"));
 
         const tileBack = document.createElement("div");
         tileBack.classList.add("tileBack");
-        tileBack.style.width = `${TILE_WIDTH - 0.5 * TILE_OFFSET}px`;
-        tileBack.style.height = `${TILE_HEIGHT - 0.5 * TILE_OFFSET}px`;
-        tileBack.style.left = `${-TILE_OFFSET}px`;
-        tileBack.style.top = `${-TILE_OFFSET}px`;
+        tileBack.style.width = TILE_WIDTH - 0.5 * TILE_OFFSET + "px";
+        tileBack.style.height = TILE_HEIGHT - 0.5 * TILE_OFFSET + "px";
+        tileBack.style.left = -TILE_OFFSET + "px";
+        tileBack.style.top = -TILE_OFFSET + "px";
 
         const leftEdge = document.createElement("div");
         leftEdge.classList.add("leftEdge");
-        leftEdge.style.left = `${-TILE_OFFSET}px`;
-        leftEdge.style.top = `${TILE_HEIGHT - 1.5 * TILE_OFFSET}px`;
+        leftEdge.style.left = -TILE_OFFSET + "px";
+        leftEdge.style.top = TILE_HEIGHT - 1.5 * TILE_OFFSET + "px";
 
         const rightEdge = document.createElement("div");
         rightEdge.classList.add("rightEdge");
-        rightEdge.style.left = `${TILE_WIDTH - 1.5 * TILE_OFFSET}px`;
-        rightEdge.style.top = `${-TILE_OFFSET}px`;
+        rightEdge.style.left = TILE_WIDTH - 1.5 * TILE_OFFSET + "px";
+        rightEdge.style.top = -TILE_OFFSET + "px";
 
         tile.appendChild(leftEdge);
         tile.appendChild(rightEdge);
@@ -93,7 +93,7 @@ function click(coord) {
                 selectedTile.style.display = "none";
                 remove(coord, currentCoords);
                 remove(selectedCoord, currentCoords);
-                afterMove();
+                finishMove();
                 return;
             }
         }
@@ -101,7 +101,7 @@ function click(coord) {
     select(coord);
 }
 
-function afterMove() {
+function finishMove() {
     selectedCoord = null;
     if (currentCoords.length === 0) {
         alert("You won!");
@@ -151,7 +151,7 @@ function restartGame() {
         const image = images[counter];
         const tile = tileAt(coord);
         tile.style.display = "block";
-        tile.setAttribute("type", image.id);
+        tile.setAttribute("type", image.getAttribute("type"));
         const tileFront = tile.querySelector(".tileFront");
         tileFront.classList.remove("selectedTile");
         tileFront.innerHTML = "";

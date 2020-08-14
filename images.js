@@ -17,7 +17,10 @@ for (const type of types) {
         for (let i = 1; i <= type.multiplicity; i++) {
             const image = new Image(TILE_WIDTH, TILE_HEIGHT);
             image.src = `./img/${type.name}${j}.png`;
-            image.id = type.multiplicity > 1 ? `${type.name}${j}` : type.name;
+            image.setAttribute(
+                "type",
+                type.multiplicity > 1 ? `${type.name}${j}` : type.name
+            );
             images.push(image);
         }
     }
