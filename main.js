@@ -39,9 +39,10 @@ function executeMove(tile, selectedTile, coord, selectedCoord) {
     if (currentCoords.length === 0) {
         alert("You won!");
     } else {
+        alert("Computing...");
         setTimeout(() => {
             checkMovePossible();
-        }, 1000);
+        }, 100);
     }
 }
 
@@ -65,6 +66,7 @@ function checkMovePossible() {
             const p = currentCoords[i];
             const q = currentCoords[j];
             if (
+                p.toString() !== q.toString() &&
                 isOpen(p, currentCoords) &&
                 isOpen(q, currentCoords) &&
                 tileAt(p).getAttribute("type") === tileAt(q).getAttribute("type")
@@ -73,12 +75,13 @@ function checkMovePossible() {
             }
         }
     }
-    if (moves.length > 1) {
-        alert("There are " + moves.length + " possible moves.");
+    if (moves.length == 0) {
+        alert("You lost the game. There are no moves left.");
+        return;
     } else if (moves.length === 1) {
         alert("There is one possible move.");
     } else {
-        alert("You lost the game! There are no moves left.");
+        alert("There are " + moves.length + " possible moves.");
     }
     hintCoord = randEl(randEl(moves));
 }
