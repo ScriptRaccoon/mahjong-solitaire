@@ -13,3 +13,15 @@ export function remove(element, list) {
     const i = list.findIndex((search) => search.toString() == element.toString());
     list.splice(i, 1);
 }
+
+export function alert(txt) {
+    document.getElementById("alert").innerText = txt;
+}
+
+export function tileAt(coord) {
+    return document.getElementById(coord.toString());
+}
+
+export function tileFrontAt(coord) {
+    return document.getElementById(coord.toString()).querySelector(".tileFront");
+}

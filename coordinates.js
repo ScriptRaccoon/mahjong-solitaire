@@ -159,7 +159,7 @@ const level4 = [[6.5, 3.5, 4]];
 
 export const COORDINATES = [...level0, ...level1, ...level2, ...level3, ...level4];
 
-export function leftNeighbors(coord) {
+function leftNeighbors(coord) {
     if (
         coord.toString() === [1, 3, 0].toString() ||
         coord.toString() === [1, 4, 0].toString()
@@ -176,7 +176,7 @@ export function leftNeighbors(coord) {
     return [[x - 1, y, z]];
 }
 
-export function rightNeighbors(coord) {
+function rightNeighbors(coord) {
     if (coord.toString() === [0, 3.5, 0].toString()) {
         return [
             [1, 3, 0],
