@@ -14,6 +14,11 @@ export function remove(element, list) {
     list.splice(i, 1);
 }
 
+export function randEl(list) {
+    const index = Math.floor(Math.random() * list.length);
+    return list[index];
+}
+
 export function alert(txt) {
     document.getElementById("alert").innerText = txt;
 }

@@ -1,6 +1,6 @@
 import { images } from "./images.js";
 import { createTiles } from "./createTiles.js";
-import { shuffle, remove, tileAt, tileFrontAt, alert } from "./helper.js";
+import { shuffle, remove, tileAt, tileFrontAt, alert, randEl } from "./helper.js";
 import { isOpen, COORDINATES } from "./coordinates.js";
 
 let selectedCoord = null;
@@ -21,11 +21,7 @@ function click(coord) {
             const tile = tileAt(coord);
             const selectedTile = tileAt(selectedCoord);
             if (tile.getAttribute("type") === selectedTile.getAttribute("type")) {
-                tile.style.display = "none";
-                selectedTile.style.display = "none";
-                remove(coord, currentCoords);
-                remove(selectedCoord, currentCoords);
-                finishMove();
+                executeMove(tile, selectedTile, coord, selectedCoord);
                 return;
             }
         }
@@ -33,16 +29,24 @@ function click(coord) {
     select(coord);
 }
 
-function finishMove() {
+function executeMove(tile, selectedTile, coord, selectedCoord) {
+    tile.style.display = "none";
+    selectedTile.style.display = "none";
+    remove(coord, currentCoords);
+    remove(selectedCoord, currentCoords);
     selectedCoord = null;
+    hintCoord = null;
     if (currentCoords.length === 0) {
         alert("You won!");
     } else {
-        checkMovePossible();
+        setTimeout(() => {
+            checkMovePossible();
+        }, 1000);
     }
 }
 
 function select(coord) {
+    if (!coord) return;
     unselect(selectedCoord);
     selectedCoord = coord;
     tileFrontAt(coord).classList.add("selectedTile");
@@ -55,22 +59,28 @@ function unselect(coord) {
 }
 
 function checkMovePossible() {
-    for (const p of currentCoords) {
-        for (const q of currentCoords) {
+    let moves = [];
+    for (let i = 0; i < currentCoords.length; i++) {
+        for (let j = i + 1; j < currentCoords.length; j++) {
+            const p = currentCoords[i];
+            const q = currentCoords[j];
             if (
-                p.toString() != q.toString() &&
                 isOpen(p, currentCoords) &&
                 isOpen(q, currentCoords) &&
                 tileAt(p).getAttribute("type") === tileAt(q).getAttribute("type")
             ) {
-                hintCoord = p;
-                alert("There is a move available.");
-                return;
+                moves.push([p, q]);
             }
         }
     }
-    alert("Oh no! There are no moves left.");
-    hintCoord = null;
+    if (moves.length > 1) {
+        alert("There are " + moves.length + " possible moves.");
+    } else if (moves.length === 1) {
+        alert("There is one possible move.");
+    } else {
+        alert("You lost the game! There are no moves left.");
+    }
+    hintCoord = randEl(randEl(moves));
 }
 
 document.addEventListener("keydown", (e) => {
