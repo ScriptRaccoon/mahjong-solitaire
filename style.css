@@ -68,22 +68,22 @@ header {
     position: absolute;
     background-color: #888;
     border-radius: 7px 0px 0px 0px;
+    border-top: 1px solid #555;
+    border-left: 1px solid #555;
 }
 
 .leftEdge {
     position: absolute;
-    width: 0;
-    height: 0;
-    border-top: 7px solid #888;
-    border-left: 7px solid transparent;
-    border-right: 7px solid #888;
+    background-color: #888;
+    border-left: 1px solid #555;
+    border-bottom: 1px solid #555;
+    transform: skewX(45deg);
 }
 
 .rightEdge {
     position: absolute;
-    width: 0;
-    height: 0;
-    border-left: 7px solid #888;
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid #888;
+    background-color: #888;
+    border-top: 1px solid #555;
+    border-right: 1px solid #555;
+    transform: skewY(45deg);
 }

@@ -38,19 +38,22 @@ export function createTiles(clickFunction) {
 
         const leftEdge = document.createElement("div");
         leftEdge.classList.add("leftEdge");
-        leftEdge.style.left = -TILE_OFFSET + "px";
+        leftEdge.style.width = TILE_WIDTH - 0.5 * TILE_OFFSET + "px";
+        leftEdge.style.height = TILE_OFFSET + "px";
         leftEdge.style.top = TILE_HEIGHT - 1.5 * TILE_OFFSET + "px";
+        leftEdge.style.left = -0.5 * TILE_OFFSET + "px";
 
         const rightEdge = document.createElement("div");
         rightEdge.classList.add("rightEdge");
+        rightEdge.style.width = TILE_OFFSET + "px";
+        rightEdge.style.height = TILE_HEIGHT - 0.5 * TILE_OFFSET + "px";
         rightEdge.style.left = TILE_WIDTH - 1.5 * TILE_OFFSET + "px";
-        rightEdge.style.top = -TILE_OFFSET + "px";
+        rightEdge.style.top = -0.5 * TILE_OFFSET + "px";
 
+        tile.appendChild(tileBack);
         tile.appendChild(leftEdge);
         tile.appendChild(rightEdge);
-        tile.appendChild(tileBack);
         tile.appendChild(tileFront);
-
         game.appendChild(tile);
     }
 }
