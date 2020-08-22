@@ -130,3 +130,33 @@ footer {
     border-right: 1px solid #555;
     transform: skewY(45deg);
 }
+
+@media (max-width: 1050px) {
+    main {
+        transform: scale(0.9);
+    }
+}
+
+@media (max-width: 940px) {
+    main {
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 820px) {
+    main {
+        transform: scale(0.7);
+    }
+}
+
+@media (max-width: 720px) {
+    main {
+        transform: scale(0.6);
+    }
+}
+
+@media (max-width: 620px) {
+    main {
+        transform: scale(0.5);
+    }
+}
