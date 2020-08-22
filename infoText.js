@@ -10,13 +10,13 @@ infoButton.addEventListener("click", () => {
         infoTextOpen = false;
         infoButton.classList.remove("infoButtonClicked");
         infoText.style.display = "none";
-        game.style.display = "block";
-        footer.style.display = "flex";
+        game.style.opacity = 1;
+        footer.style.opacity = 1;
     } else {
         infoTextOpen = true;
         infoButton.classList.add("infoButtonClicked");
-        game.style.display = "none";
-        footer.style.display = "none";
+        game.style.opacity = 0.02;
+        footer.style.opacity = 0.02;
         infoText.style.display = "block";
     }
 });
