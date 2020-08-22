@@ -2,6 +2,7 @@ import { images } from "./images.js";
 import { createTiles } from "./createTiles.js";
 import { shuffle, remove, tileAt, tileFrontAt, alert, randEl } from "./helper.js";
 import { isOpen, COORDINATES } from "./coordinates.js";
+import {} from "./infoText.js";
 
 let selectedCoord = null;
 let currentCoords = [...COORDINATES];
