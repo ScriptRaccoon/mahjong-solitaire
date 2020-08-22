@@ -160,3 +160,15 @@ footer {
         transform: scale(0.5);
     }
 }
+
+@media (max-width: 520px) {
+    main {
+        transform: scale(0.4);
+    }
+}
+
+@media (max-width: 420px) {
+    main {
+        transform: scale(0.3);
+    }
+}
