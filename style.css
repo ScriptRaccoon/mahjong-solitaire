@@ -119,6 +119,7 @@ button:hover {
     background: url("./img/background-small.jpg") no-repeat center;
     position: relative;
     border-radius: 5px;
+    opacity: 0;
 }
 
 /* tile */

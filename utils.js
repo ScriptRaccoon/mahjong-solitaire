@@ -29,6 +29,10 @@ export function randEl(list) {
     return list[index];
 }
 
+export function sleep(milliseconds) {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
 export function writeStatus(txt) {
     $("#statusText").text(txt);
 }
@@ -39,8 +43,4 @@ export function tileAt(coord) {
 
 export function tileFrontAt(coord) {
     return $(`.tileFront[coord="${coord.toString()}"]`);
-}
-
-export function sleep(milliseconds) {
-    return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }

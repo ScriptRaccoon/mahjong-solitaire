@@ -7,7 +7,6 @@ import {
     tileFrontAt,
     writeStatus,
     randEl,
-    interval,
     sleep,
 } from "./utils.js";
 import { isOpen, COORDINATES } from "./coordinates.js";
@@ -17,13 +16,13 @@ let selectedCoord = null;
 let currentCoords = [...COORDINATES];
 let hintCoord = null;
 
-initGame();
+$(document).ready(initGame);
 
-function initGame() {
-    writeStatus("Game is loading...");
+async function initGame() {
     shuffle(images);
     createTiles({ clickFunction: clickTileAt });
-    checkMovePossible();
+    await checkMovePossible("Game is loading...");
+    $("#game").animate({ opacity: 1 }, "slow");
 }
 
 function clickTileAt(coord) {
@@ -45,8 +44,8 @@ function clickTileAt(coord) {
 }
 
 function executeMove(tile, selectedTile, coord, selectedCoord) {
-    $(selectedTile).animate({ opacity: 0 }, "fast");
-    $(tile).animate({ opacity: 0 }, "fast", () => {
+    selectedTile.animate({ opacity: 0 }, "fast");
+    tile.animate({ opacity: 0 }, "fast", () => {
         selectedTile.hide();
         tile.hide();
         remove(coord, currentCoords);
@@ -56,7 +55,7 @@ function executeMove(tile, selectedTile, coord, selectedCoord) {
         if (currentCoords.length === 0) {
             writeStatus("You won!");
         } else {
-            checkMovePossible();
+            checkMovePossible("Computing...");
         }
     });
 }
@@ -74,8 +73,8 @@ function unselectTileAt(coord) {
     selectedCoord = null;
 }
 
-async function checkMovePossible() {
-    writeStatus("Computing...");
+async function checkMovePossible(message) {
+    writeStatus(message);
     await sleep(50);
     const moves = [];
     for (let i = 0; i < currentCoords.length; i++) {
@@ -106,12 +105,16 @@ function updateStatus(moves) {
     }
 }
 
-$("#restartButton").click(() => {
+$("#restartButton").click(async () => {
+    $("#game").animate({ opacity: 0 }, "fast");
+    await sleep(200);
     restartGame();
-    checkMovePossible();
+    await checkMovePossible("Game is restarting...");
+    $("#game").animate({ opacity: 1 }, "fast");
 });
 
 $("#hintButton").click(() => {
+    if (!hintCoord) return;
     selectTileAt(hintCoord);
     for (let i = 0; i < 6; i++) {
         setTimeout(() => {
@@ -121,7 +124,6 @@ $("#hintButton").click(() => {
 });
 
 function restartGame() {
-    writeStatus("Game is restarting...");
     selectedCoord = null;
     hintCoord = null;
     currentCoords = [...COORDINATES];
@@ -129,7 +131,7 @@ function restartGame() {
     for (let counter = 0; counter < COORDINATES.length; counter++) {
         const coord = COORDINATES[counter];
         const image = images[counter];
-        tileAt(coord).show().attr("type", image.attr("type"));
+        tileAt(coord).show().css("opacity", 1).attr("type", image.attr("type"));
         tileFrontAt(coord).removeClass("selectedTile").html("").append(image);
     }
 }
