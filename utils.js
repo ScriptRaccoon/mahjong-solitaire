@@ -40,3 +40,7 @@ export function tileAt(coord) {
 export function tileFrontAt(coord) {
     return $(`.tileFront[coord="${coord.toString()}"]`);
 }
+
+export function sleep(milliseconds) {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}

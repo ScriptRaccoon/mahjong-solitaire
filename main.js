@@ -1,6 +1,15 @@
 import { images } from "./images.js";
 import { createTiles } from "./createTiles.js";
-import { shuffle, remove, tileAt, tileFrontAt, writeStatus, randEl } from "./helper.js";
+import {
+    shuffle,
+    remove,
+    tileAt,
+    tileFrontAt,
+    writeStatus,
+    randEl,
+    interval,
+    sleep,
+} from "./utils.js";
 import { isOpen, COORDINATES } from "./coordinates.js";
 import {} from "./infoText.js";
 
@@ -65,9 +74,10 @@ function unselectTileAt(coord) {
     selectedCoord = null;
 }
 
-function checkMovePossible() {
+async function checkMovePossible() {
     writeStatus("Computing...");
-    let moves = [];
+    await sleep(50);
+    const moves = [];
     for (let i = 0; i < currentCoords.length; i++) {
         for (let j = i + 1; j < currentCoords.length; j++) {
             const p = currentCoords[i];
@@ -81,16 +91,19 @@ function checkMovePossible() {
                 moves.push([p, q]);
             }
         }
+        updateStatus(moves);
+        if (moves.length > 0) hintCoord = randEl(randEl(moves));
     }
+}
+
+function updateStatus(moves) {
     if (moves.length == 0) {
         writeStatus("You lost the game. There are no moves left.");
-        return;
     } else if (moves.length === 1) {
         writeStatus("There is exactly one possible move.");
     } else {
         writeStatus("There are " + moves.length + " possible moves.");
     }
-    hintCoord = randEl(randEl(moves));
 }
 
 $("#restartButton").click(() => {

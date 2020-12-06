@@ -1,4 +1,4 @@
-import { disjoint, interval, matrixInterval } from "./helper.js";
+import { disjoint, interval, matrixInterval } from "./utils.js";
 
 const level0 = [
     ...interval(1, 12, (x) => [x, 0, 0]),
