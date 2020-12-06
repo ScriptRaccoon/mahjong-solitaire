@@ -7,81 +7,81 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
+        <header>
+            Mahjong solitaire
+        </header>
+
         <main>
-            <div id="wrapper">
-                <header>
-                    <span id="heading">Mahjong solitaire</span>
-                    <span id="infoButton">?</span>
-                </header>
-                <section id="infoText">
-                    <p>
-                        Select two identical tiles to remove them. Once all tiles are
-                        removed, the game is won.
-                    </p>
-                    <p>
-                        Only open tiles can be selected, meaning that they are on top and
-                        at least on one of their sides (left, right) there is no tile.
-                    </p>
-                    <p>
-                        It may happen that you make a wrong move after which the game
-                        cannot be won anymore.
-                    </p>
-                    <p>
-                        Use the key 'h' to get a hint for a possible move. Use the key
-                        'Enter' to restart the game.
-                    </p>
-                    <p>
-                        Check out
-                        <a
-                            href="https://en.wikipedia.org/wiki/Mahjong_tiles"
-                            target="_blank"
-                            >Wikipedia</a
-                        >
-                        for a description of all the 144 tiles. They fall into 7
-                        categories (dots, bamboos, characters, winds, dragons, seasons,
-                        flowers). Every tile appears exactly 4 times, except for the 4
-                        seasons
-                    </p>
-                    <p>
-                        <img src="./img/season1.png" />
-                        <img src="./img/season2.png" />
-                        <img src="./img/season3.png" />
-                        <img src="./img/season4.png" />
-                    </p>
-                    <p>
-                        and the 4 flowers
-                    </p>
-                    <p>
-                        <img src="./img/flower1.png" />
-                        <img src="./img/flower2.png" />
-                        <img src="./img/flower3.png" />
-                        <img src="./img/flower4.png" />
-                    </p>
-                    <p>
-                        which each appear only once. For this reason every pair of seasons
-                        (or flowers) can be removed as well, even if they are not
-                        identical.
-                    </p>
-                    <p>
-                        You can find the code on
-                        <a
-                            target="_blank"
-                            href="https://github.com/ScriptRaccoon/mahjong-solitaire"
-                            >GitHub</a
-                        >.
-                    </p>
-                </section>
-                <section id="game"></section>
-                <footer>
-                    <span id="alert"></span>
-                    <span>
-                        <button id="hintButton">Hint</button>
-                        <button id="restartButton">Restart</button>
-                    </span>
-                </footer>
-            </div>
+            <section id="infoText">               
+                <p>
+                    Select two identical tiles to remove them. Once all tiles are
+                    removed, the game is won.
+                </p>
+                <p>
+                    Only open tiles can be selected, meaning that they are on top and
+                    at least on one of their sides (left, right) there is no tile.
+                </p>
+                <p>
+                    It may happen that you make a wrong move after which the game
+                    cannot be won anymore.
+                </p>
+                <p>
+                    Use the key 'h' to get a hint for a possible move. Use the key
+                    'Enter' to restart the game.
+                </p>
+                <p>
+                    Check out
+                    <a
+                        href="https://en.wikipedia.org/wiki/Mahjong_tiles"
+                        target="_blank"
+                        >Wikipedia</a
+                    >
+                    for a description of all the 144 tiles. They fall into 7
+                    categories (dots, bamboos, characters, winds, dragons, seasons,
+                    flowers). Every tile appears exactly 4 times, except for the 4
+                    seasons
+                </p>
+                <p>
+                    <img src="./img/season1.png" />
+                    <img src="./img/season2.png" />
+                    <img src="./img/season3.png" />
+                    <img src="./img/season4.png" />
+                </p>
+                <p>
+                    and the 4 flowers
+                </p>
+                <p>
+                    <img src="./img/flower1.png" />
+                    <img src="./img/flower2.png" />
+                    <img src="./img/flower3.png" />
+                    <img src="./img/flower4.png" />
+                </p>
+                <p>
+                    which each appear only once. For this reason every pair of seasons
+                    (or flowers) can be removed as well, even if they are not
+                    identical.
+                </p>
+                <p>
+                    You can find the code on
+                    <a
+                        target="_blank"
+                        href="https://github.com/ScriptRaccoon/mahjong-solitaire"
+                        >GitHub</a
+                    >.
+                </p>                               
+            </section>
+            <section id="game"></section>     
         </main>
 
+        <footer>
+            <span id="statusText"></span>
+            <span id="controls">
+                <button id="hintButton">Hint</button>
+                <button id="restartButton">Restart</button>
+                <button id="infoButton">Info</button>
+            </span>
+        </footer> 
+    
         <script src="main.js" type="module"></script>
     </body>
 </html>

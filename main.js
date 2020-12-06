@@ -1,6 +1,6 @@
 import { images } from "./images.js";
 import { createTiles } from "./createTiles.js";
-import { shuffle, remove, tileAt, tileFrontAt, alert, randEl } from "./helper.js";
+import { shuffle, remove, tileAt, tileFrontAt, writeStatus, randEl } from "./helper.js";
 import { isOpen, COORDINATES } from "./coordinates.js";
 import { infoTextOpen } from "./infoText.js";
 
@@ -9,7 +9,7 @@ let currentCoords = [...COORDINATES];
 let hintCoord = null;
 
 shuffle(images);
-createTiles(click);
+createTiles({ callback: click });
 checkMovePossible();
 
 function click(coord) {
@@ -38,9 +38,9 @@ function executeMove(tile, selectedTile, coord, selectedCoord) {
     selectedCoord = null;
     hintCoord = null;
     if (currentCoords.length === 0) {
-        alert("You won!");
+        writeStatus("You won!");
     } else {
-        alert("Computing...");
+        writeStatus("Computing...");
         setTimeout(() => {
             checkMovePossible();
         }, 100);
@@ -77,24 +77,22 @@ function checkMovePossible() {
         }
     }
     if (moves.length == 0) {
-        alert("You lost the game. There are no moves left.");
+        writeStatus("You lost the game. There are no moves left.");
         return;
     } else if (moves.length === 1) {
-        alert("There is one possible move.");
+        writeStatus("There is one possible move.");
     } else {
-        alert("There are " + moves.length + " possible moves.");
+        writeStatus("There are " + moves.length + " possible moves.");
     }
     hintCoord = randEl(randEl(moves));
 }
 
 document.getElementById("restartButton").addEventListener("click", () => {
-    if (infoTextOpen) return;
     restartGame();
     checkMovePossible();
 });
 
 document.getElementById("hintButton").addEventListener("click", () => {
-    if (infoTextOpen) return;
     select(hintCoord);
 });
 

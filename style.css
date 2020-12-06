@@ -1,84 +1,72 @@
+/* global styles */
+
 * {
     box-sizing: border-box;
 }
 
+:root {
+    --font-color: #ddd;
+    --background-color: rgb(5, 2, 24);
+    --base-width: 1000px;
+    --base-height: 700px;
+    --tile-color-bottom-right: #eec;
+    --tile-color-top-left: #eef;
+    --tile-color-hover: #eea;
+    --tile-border-color: #555;
+    --tile-back-color: #888;
+}
+
 body {
-    background-color: rgb(5, 2, 24);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--font-color);
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
+
+/* header */
+
+header {
+    text-align: center;
+    padding: 20px 0px;
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+/* main */
 
 main {
-    display: flex;
-    justify-content: center;
-}
-
-#wrapper {
-    position: absolute;
+    width: var(--base-width);
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #ddd;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    width: 1000px;
 }
 
-header {
-    padding: 20px 0px;
-}
-
-#heading {
-    font-size: 26px;
-}
-
-#infoButton {
-    color: #aaa;
-    position: absolute;
-    right: 0;
-    top: 26px;
-    border: 1px solid #aaa;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    text-align: center;
-    cursor: pointer;
-    transition: all 200ms;
-}
-
-#infoButton:hover {
-    color: rgb(5, 2, 24) !important;
-    background-color: #ddd;
-}
-
-.infoButtonClicked {
-    color: rgb(5, 2, 24) !important;
-    background-color: #ddd;
-}
-
-#infoText {
-    width: 70%;
-    display: none;
-    font-size: 18px;
-    position: absolute;
-}
-
-#infoText a {
-    color: orange;
-}
-
-#infoText img {
-    width: 50px;
-    background-color: white;
-    border-radius: 5px;
-}
+/* footer */
 
 footer {
-    width: 100%;
+    width: var(--base-width);
     padding: 15px 0px;
-    display: flex;
-    justify-content: space-between;
+    position: relative;
 }
+
+#statusText {
+    position: absolute;
+    left: 0;
+}
+
+#controls {
+    position: absolute;
+    right: 0;
+}
+
+/* buttons */
 
 button {
     border: none;
@@ -95,14 +83,39 @@ button:hover {
     color: orange;
 }
 
-#game {
+/* infotext */
+
+#infoText {
     width: 100%;
-    background-color: yellow;
-    height: 700px;
+    height: 100%;
+    display: none;
+    font-size: 18px;
+    position: absolute;
+    z-index: 1;
+    padding: 0px 150px;
+}
+
+#infoText a {
+    color: orange;
+}
+
+#infoText img {
+    width: 50px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+/* game */
+
+#game {
+    width: var(--base-width);
+    height: var(--base-height);
     background: url("./img/background-small.jpg") no-repeat center;
     position: relative;
-    border-radius: 7px;
+    border-radius: 5px;
 }
+
+/* tile */
 
 .tile {
     position: absolute;
@@ -110,82 +123,85 @@ button:hover {
 
 .tileFront {
     position: absolute;
-    background-image: linear-gradient(to left top, #eec, #eef);
-    border-radius: 5px;
-    border: 1px solid #555;
+    background-image: linear-gradient(
+        to left top,
+        var(--tile-color-bottom-right),
+        var(--tile-color-top-left)
+    );
+    border: 1px solid var(--tile-border-color);
     cursor: pointer;
 }
 
 .tileFront:hover {
-    background-image: linear-gradient(#eea, #eea);
+    background-image: linear-gradient(
+        to left top,
+        var(--tile-color-hover),
+        var(--tile-color-hover)
+    );
 }
 
 .selectedTile {
-    background-image: linear-gradient(#eea, #eea);
+    background-image: linear-gradient(
+        to left top,
+        var(--tile-color-hover),
+        var(--tile-color-hover)
+    );
 }
 
 .tileBack {
     position: absolute;
-    background-color: #888;
-    border-radius: 7px 0px 0px 0px;
-    border-top: 1px solid #555;
-    border-left: 1px solid #555;
+    background-color: var(--tile-back-color);
+    border: 1px solid var(--tile-border-color);
 }
 
-.leftEdge {
-    position: absolute;
-    background-color: #888;
-    border-left: 1px solid #555;
-    border-bottom: 1px solid #555;
-    transform: skewX(45deg);
-}
-
-.rightEdge {
-    position: absolute;
-    background-color: #888;
-    border-top: 1px solid #555;
-    border-right: 1px solid #555;
-    transform: skewY(45deg);
-}
+/* media queries (needs improvement) */
+/* 
 
 @media (max-width: 1050px), (max-height: 840px) {
-    main {
+    main,
+    footer {
         transform: scale(0.9);
     }
 }
 
 @media (max-width: 940px), (max-height: 750px) {
-    main {
+    main,
+    footer {
         transform: scale(0.8);
     }
 }
 
 @media (max-width: 820px), (max-height: 660px) {
-    main {
+    main,
+    footer {
         transform: scale(0.7);
     }
 }
 
 @media (max-width: 720px), (max-height: 580px) {
-    main {
+    main,
+    footer {
         transform: scale(0.6);
     }
 }
 
 @media (max-width: 620px), (max-height: 500px) {
-    main {
+    main,
+    footer {
         transform: scale(0.5);
     }
 }
 
 @media (max-width: 520px), (max-height: 420px) {
-    main {
+    main,
+    footer {
         transform: scale(0.4);
     }
 }
 
 @media (max-width: 420px), (max-height: 340px) {
-    main {
+    main,
+    footer {
         transform: scale(0.3);
     }
-}
+} */

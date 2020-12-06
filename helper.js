@@ -19,8 +19,8 @@ export function randEl(list) {
     return list[index];
 }
 
-export function alert(txt) {
-    document.getElementById("alert").innerText = txt;
+export function writeStatus(txt) {
+    document.getElementById("statusText").innerText = txt;
 }
 
 export function tileAt(coord) {
