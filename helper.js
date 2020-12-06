@@ -5,6 +5,16 @@ export function shuffle(list) {
     }
 }
 
+export function interval(a, b, mapfunction) {
+    if (mapfunction)
+        return new Array(b - a + 1).fill(0).map((el, index) => mapfunction(a + index));
+    return new Array(b - a + 1).fill(0).map((el, index) => a + index);
+}
+
+export function matrixInterval(a, b, c, d, mapfunction) {
+    return interval(c, d, (y) => interval(a, b, (x) => mapfunction(x, y))).flat(1);
+}
+
 export function disjoint(list1, list2) {
     return list1.every((a) => list2.every((b) => a.toString() != b.toString()));
 }
