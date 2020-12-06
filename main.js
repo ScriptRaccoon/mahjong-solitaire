@@ -2,7 +2,7 @@ import { images } from "./images.js";
 import { createTiles } from "./createTiles.js";
 import { shuffle, remove, tileAt, tileFrontAt, alert, randEl } from "./helper.js";
 import { isOpen, COORDINATES } from "./coordinates.js";
-import {} from "./infoText.js";
+import { infoTextOpen } from "./infoText.js";
 
 let selectedCoord = null;
 let currentCoords = [...COORDINATES];
@@ -13,7 +13,7 @@ createTiles(click);
 checkMovePossible();
 
 function click(coord) {
-    if (!isOpen(coord, currentCoords)) return;
+    if (infoTextOpen || !isOpen(coord, currentCoords)) return;
     if (selectedCoord) {
         if (coord.toString() === selectedCoord.toString()) {
             unselect(coord);
@@ -87,12 +87,14 @@ function checkMovePossible() {
     hintCoord = randEl(randEl(moves));
 }
 
-document.getElementById("restartBtn").addEventListener("click", () => {
+document.getElementById("restartButton").addEventListener("click", () => {
+    if (infoTextOpen) return;
     restartGame();
     checkMovePossible();
 });
 
-document.getElementById("hintBtn").addEventListener("click", () => {
+document.getElementById("hintButton").addEventListener("click", () => {
+    if (infoTextOpen) return;
     select(hintCoord);
 });
 
