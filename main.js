@@ -87,13 +87,13 @@ function checkMovePossible() {
     hintCoord = randEl(randEl(moves));
 }
 
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        restartGame();
-        checkMovePossible();
-    } else if (e.key === "h" && hintCoord) {
-        select(hintCoord);
-    }
+document.getElementById("restartBtn").addEventListener("click", () => {
+    restartGame();
+    checkMovePossible();
+});
+
+document.getElementById("hintBtn").addEventListener("click", () => {
+    select(hintCoord);
 });
 
 function restartGame() {
