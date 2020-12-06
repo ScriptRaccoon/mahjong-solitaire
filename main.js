@@ -94,6 +94,11 @@ document.getElementById("restartButton").addEventListener("click", () => {
 
 document.getElementById("hintButton").addEventListener("click", () => {
     select(hintCoord);
+    for (let i = 0; i < 6; i++) {
+        setTimeout(() => {
+            tileFrontAt(hintCoord).classList.toggle("selectedTile");
+        }, 200 * i);
+    }
 });
 
 function restartGame() {

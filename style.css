@@ -14,6 +14,7 @@
     --tile-color-hover: #eea;
     --tile-border-color: #555;
     --tile-back-color: #888;
+    --button-color: rgba(255, 0, 255, 0.2);
 }
 
 body {
@@ -70,8 +71,8 @@ footer {
 
 button {
     border: none;
-    color: white;
-    background-color: rgba(255, 0, 255, 0.2);
+    color: var(--font-color);
+    background-color: var(--button-color);
     padding: 5px 15px;
     font-family: inherit;
     font-size: inherit;
@@ -92,11 +93,13 @@ button:hover {
     font-size: 18px;
     position: absolute;
     z-index: 1;
-    padding: 0px 150px;
+    padding: 0px 170px;
+    text-align: justify;
 }
 
 #infoText a {
     color: orange;
+    text-decoration: none;
 }
 
 #infoText img {
