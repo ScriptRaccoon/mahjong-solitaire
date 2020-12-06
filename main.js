@@ -83,16 +83,16 @@ async function checkMovePossible(message) {
             const q = currentCoords[j];
             if (
                 p.toString() !== q.toString() &&
+                tileAt(p).attr("type") === tileAt(q).attr("type") &&
                 isOpen(p, currentCoords) &&
-                isOpen(q, currentCoords) &&
-                tileAt(p).attr("type") === tileAt(q).attr("type")
+                isOpen(q, currentCoords)
             ) {
                 moves.push([p, q]);
             }
         }
-        updateStatus(moves);
-        if (moves.length > 0) hintCoord = randEl(randEl(moves));
     }
+    updateStatus(moves);
+    if (moves.length > 0) hintCoord = randEl(randEl(moves));
 }
 
 function updateStatus(moves) {
