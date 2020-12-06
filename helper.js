@@ -30,13 +30,13 @@ export function randEl(list) {
 }
 
 export function writeStatus(txt) {
-    document.getElementById("statusText").innerText = txt;
+    $("#statusText").text(txt);
 }
 
 export function tileAt(coord) {
-    return document.getElementById(coord.toString());
+    return $(`.tile[coord="${coord.toString()}"]`);
 }
 
 export function tileFrontAt(coord) {
-    return document.getElementById(coord.toString()).querySelector(".tileFront");
+    return $(`.tileFront[coord="${coord.toString()}"]`);
 }

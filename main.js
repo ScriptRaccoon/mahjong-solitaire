@@ -2,7 +2,7 @@ import { images } from "./images.js";
 import { createTiles } from "./createTiles.js";
 import { shuffle, remove, tileAt, tileFrontAt, writeStatus, randEl } from "./helper.js";
 import { isOpen, COORDINATES } from "./coordinates.js";
-import { infoTextOpen } from "./infoText.js";
+import {} from "./infoText.js";
 
 let selectedCoord = null;
 let currentCoords = [...COORDINATES];
@@ -13,61 +13,60 @@ initGame();
 function initGame() {
     writeStatus("Game is loading...");
     shuffle(images);
-    createTiles({ clickFunction: click });
-    setTimeout(() => {
-        checkMovePossible();
-    }, 1);
+    createTiles({ clickFunction: clickTileAt });
+    checkMovePossible();
 }
 
-function click(coord) {
-    if (infoTextOpen || !isOpen(coord, currentCoords)) return;
+function clickTileAt(coord) {
+    if (!isOpen(coord, currentCoords)) return;
     if (selectedCoord) {
         if (coord.toString() === selectedCoord.toString()) {
-            unselect(coord);
+            unselectTileAt(coord);
             return;
         } else {
             const tile = tileAt(coord);
             const selectedTile = tileAt(selectedCoord);
-            if (tile.getAttribute("type") === selectedTile.getAttribute("type")) {
+            if (tile.attr("type") === selectedTile.attr("type")) {
                 executeMove(tile, selectedTile, coord, selectedCoord);
                 return;
             }
         }
     }
-    select(coord);
+    selectTileAt(coord);
 }
 
 function executeMove(tile, selectedTile, coord, selectedCoord) {
-    tile.style.display = "none";
-    selectedTile.style.display = "none";
-    remove(coord, currentCoords);
-    remove(selectedCoord, currentCoords);
-    selectedCoord = null;
-    hintCoord = null;
-    if (currentCoords.length === 0) {
-        writeStatus("You won!");
-    } else {
-        writeStatus("Computing...");
-        setTimeout(() => {
+    $(selectedTile).animate({ opacity: 0 }, "fast");
+    $(tile).animate({ opacity: 0 }, "fast", () => {
+        selectedTile.hide();
+        tile.hide();
+        remove(coord, currentCoords);
+        remove(selectedCoord, currentCoords);
+        selectedCoord = null;
+        hintCoord = null;
+        if (currentCoords.length === 0) {
+            writeStatus("You won!");
+        } else {
             checkMovePossible();
-        }, 100);
-    }
+        }
+    });
 }
 
-function select(coord) {
+function selectTileAt(coord) {
     if (!coord) return;
-    unselect(selectedCoord);
+    unselectTileAt(selectedCoord);
     selectedCoord = coord;
-    tileFrontAt(coord).classList.add("selectedTile");
+    tileFrontAt(coord).addClass("selectedTile");
 }
 
-function unselect(coord) {
+function unselectTileAt(coord) {
     if (!coord) return;
-    tileFrontAt(coord).classList.remove("selectedTile");
+    tileFrontAt(coord).removeClass("selectedTile");
     selectedCoord = null;
 }
 
 function checkMovePossible() {
+    writeStatus("Computing...");
     let moves = [];
     for (let i = 0; i < currentCoords.length; i++) {
         for (let j = i + 1; j < currentCoords.length; j++) {
@@ -77,7 +76,7 @@ function checkMovePossible() {
                 p.toString() !== q.toString() &&
                 isOpen(p, currentCoords) &&
                 isOpen(q, currentCoords) &&
-                tileAt(p).getAttribute("type") === tileAt(q).getAttribute("type")
+                tileAt(p).attr("type") === tileAt(q).attr("type")
             ) {
                 moves.push([p, q]);
             }
@@ -87,25 +86,23 @@ function checkMovePossible() {
         writeStatus("You lost the game. There are no moves left.");
         return;
     } else if (moves.length === 1) {
-        writeStatus("There is one possible move.");
+        writeStatus("There is exactly one possible move.");
     } else {
         writeStatus("There are " + moves.length + " possible moves.");
     }
     hintCoord = randEl(randEl(moves));
 }
 
-document.getElementById("restartButton").addEventListener("click", () => {
+$("#restartButton").click(() => {
     restartGame();
-    setTimeout(() => {
-        checkMovePossible();
-    }, 1);
+    checkMovePossible();
 });
 
-document.getElementById("hintButton").addEventListener("click", () => {
-    select(hintCoord);
+$("#hintButton").click(() => {
+    selectTileAt(hintCoord);
     for (let i = 0; i < 6; i++) {
         setTimeout(() => {
-            tileFrontAt(hintCoord).classList.toggle("selectedTile");
+            tileFrontAt(hintCoord).toggleClass("selectedTile");
         }, 200 * i);
     }
 });
@@ -119,12 +116,7 @@ function restartGame() {
     for (let counter = 0; counter < COORDINATES.length; counter++) {
         const coord = COORDINATES[counter];
         const image = images[counter];
-        const tile = tileAt(coord);
-        tile.style.display = "block";
-        tile.setAttribute("type", image.getAttribute("type"));
-        const tileFront = tile.querySelector(".tileFront");
-        tileFront.classList.remove("selectedTile");
-        tileFront.innerHTML = "";
-        tileFront.appendChild(image);
+        tileAt(coord).show().attr("type", image.attr("type"));
+        tileFrontAt(coord).removeClass("selectedTile").html("").append(image);
     }
 }

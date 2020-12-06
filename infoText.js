@@ -1,24 +1,15 @@
-const infoButton = document.getElementById("infoButton");
-const infoText = document.getElementById("infoText");
-const game = document.getElementById("game");
-const statusText = document.getElementById("statusText");
+let infoTextOpen = false;
 
-export let infoTextOpen = false;
-
-infoButton.addEventListener("click", () => {
+$("#infoButton").click(() => {
     if (infoTextOpen) {
         infoTextOpen = false;
-        infoText.style.display = "none";
-        statusText.style.display = "inline";
-        hintButton.style.display = "inline";
-        restartButton.style.display = "inline";
-        game.style.opacity = 1;
+        $("#infoText").fadeOut("linear");
+        $("#statusText, #hintButton, #restartButton").fadeIn("linear");
+        $("#game").animate({ opacity: 1 }, "linear");
     } else {
         infoTextOpen = true;
-        infoText.style.display = "block";
-        game.style.opacity = 0.01;
-        hintButton.style.display = "none";
-        restartButton.style.display = "none";
-        statusText.style.display = "none";
+        $("#infoText").fadeIn("linear");
+        $("#statusText, #hintButton, #restartButton").fadeOut("linear");
+        $("#game").animate({ opacity: 0.01 }, "linear");
     }
 });

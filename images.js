@@ -15,12 +15,15 @@ const types = [
 for (const type of types) {
     for (let j = 1; j <= type.number; j++) {
         for (let i = 1; i <= type.multiplicity; i++) {
-            const image = new Image(TILE_WIDTH, TILE_HEIGHT);
-            image.src = `./img/${type.name}${j}.png`;
-            image.setAttribute(
-                "type",
-                type.multiplicity > 1 ? `${type.name}${j}` : type.name
-            );
+            const image = $("<img></img>")
+                .css({
+                    width: TILE_WIDTH,
+                    height: TILE_HEIGHT,
+                })
+                .attr({
+                    src: `./img/${type.name}${j}.png`,
+                    type: type.multiplicity > 1 ? `${type.name}${j}` : type.name,
+                });
             images.push(image);
         }
     }
