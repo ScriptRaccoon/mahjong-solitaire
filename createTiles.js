@@ -19,7 +19,7 @@ export function createTiles(options) {
         tileFront.style.height = TILE_HEIGHT + "px";
         tileFront.style.borderRadius = TILE_ROUNDNESS + "px";
         tileFront.addEventListener("click", () => {
-            options.callback(coord);
+            options.clickFunction(coord);
         });
         tileFront.appendChild(image);
         const tile = document.createElement("div");

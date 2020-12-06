@@ -8,9 +8,16 @@ let selectedCoord = null;
 let currentCoords = [...COORDINATES];
 let hintCoord = null;
 
-shuffle(images);
-createTiles({ callback: click });
-checkMovePossible();
+initGame();
+
+function initGame() {
+    writeStatus("Game is loading...");
+    shuffle(images);
+    createTiles({ clickFunction: click });
+    setTimeout(() => {
+        checkMovePossible();
+    }, 1);
+}
 
 function click(coord) {
     if (infoTextOpen || !isOpen(coord, currentCoords)) return;
@@ -89,7 +96,9 @@ function checkMovePossible() {
 
 document.getElementById("restartButton").addEventListener("click", () => {
     restartGame();
-    checkMovePossible();
+    setTimeout(() => {
+        checkMovePossible();
+    }, 1);
 });
 
 document.getElementById("hintButton").addEventListener("click", () => {
@@ -102,6 +111,7 @@ document.getElementById("hintButton").addEventListener("click", () => {
 });
 
 function restartGame() {
+    writeStatus("Game is restarting...");
     selectedCoord = null;
     hintCoord = null;
     currentCoords = [...COORDINATES];
