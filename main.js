@@ -115,12 +115,16 @@ $("#restartButton").click(async () => {
 
 $("#hintButton").click(() => {
     if (!hintCoord) return;
-    selectTileAt(hintCoord);
-    for (let i = 0; i < 6; i++) {
+    let toggleNumber = 6;
+    let toggleDelay = 200;
+    for (let i = 0; i < toggleNumber; i++) {
         setTimeout(() => {
-            tileFrontAt(hintCoord).toggleClass("selectedTile");
-        }, 200 * i);
+            tileFrontAt(hintCoord).toggleClass("alertTile");
+        }, toggleDelay * i);
     }
+    setTimeout(() => {
+        selectTileAt(hintCoord);
+    }, toggleDelay * toggleNumber);
 });
 
 function restartGame() {

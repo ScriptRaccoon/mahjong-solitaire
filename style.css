@@ -11,7 +11,8 @@
     --base-height: 700px;
     --tile-color-bottom-right: #eec;
     --tile-color-top-left: #eef;
-    --tile-color-hover: #eea;
+    --tile-color-hover: #ee7;
+    --tile-color-alert: #ff0;
     --tile-border-color: #555;
     --tile-back-color: #888;
     --button-color: rgba(255, 0, 255, 0.2);
@@ -154,6 +155,14 @@ button:hover {
         to left top,
         var(--tile-color-hover),
         var(--tile-color-hover)
+    );
+}
+
+.alertTile {
+    background-image: linear-gradient(
+        to left top,
+        var(--tile-color-alert),
+        var(--tile-color-alert)
     );
 }
 
