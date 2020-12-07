@@ -53,7 +53,7 @@ function executeMove(tile, selectedTile, coord, selectedCoord) {
         selectedCoord = null;
         hintCoord = null;
         if (currentCoords.length === 0) {
-            writeStatus("You won!");
+            writeStatus("You won! 🎉");
         } else {
             checkMovePossible("Computing...");
         }
@@ -97,11 +97,11 @@ async function checkMovePossible(message) {
 
 function updateStatus(moves) {
     if (moves.length == 0) {
-        writeStatus("You lost the game. There are no moves left.");
+        writeStatus("There are no moves left. Gameover. 🚧");
     } else if (moves.length === 1) {
-        writeStatus("There is exactly one possible move.");
+        writeStatus("There is <strong>exactly one</strong> possible move.");
     } else {
-        writeStatus("There are " + moves.length + " possible moves.");
+        writeStatus("There are <strong>" + moves.length + "</strong> possible moves.");
     }
 }
 

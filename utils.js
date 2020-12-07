@@ -34,7 +34,7 @@ export function sleep(milliseconds) {
 }
 
 export function writeStatus(txt) {
-    $("#statusText").text(txt);
+    $("#statusText").html(txt);
 }
 
 export function tileAt(coord) {
