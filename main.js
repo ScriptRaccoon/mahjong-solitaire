@@ -52,8 +52,6 @@ function executeMove(tile, selectedTile, coord, coord2) {
         tile.hide();
         remove(coord, currentCoords);
         remove(coord2, currentCoords);
-        selectedCoord = null;
-        hintCoord = null;
         if (currentCoords.length === 0) {
             writeStatus("You won! 🎉");
         } else {
