@@ -43,13 +43,15 @@ function clickTileAt(coord) {
     selectTileAt(coord);
 }
 
-function executeMove(tile, selectedTile, coord, selectedCoord) {
+function executeMove(tile, selectedTile, coord, coord2) {
+    selectedCoord = null;
+    hintCoord = null;
     selectedTile.animate({ opacity: 0 }, "fast");
     tile.animate({ opacity: 0 }, "fast", () => {
         selectedTile.hide();
         tile.hide();
         remove(coord, currentCoords);
-        remove(selectedCoord, currentCoords);
+        remove(coord2, currentCoords);
         selectedCoord = null;
         hintCoord = null;
         if (currentCoords.length === 0) {
