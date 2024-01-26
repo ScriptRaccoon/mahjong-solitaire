@@ -56,7 +56,7 @@ function rightNeighbors(coord) {
 }
 
 export function isOpen(coord, currentCoords) {
-    if (disjoint([coord], currentCoords)) false;
+    if (disjoint([coord], currentCoords)) return false;
     const [x, y, z] = coord;
     if (
         currentCoords.some(([a, b, c]) => a === x && b === y && c > z) ||
